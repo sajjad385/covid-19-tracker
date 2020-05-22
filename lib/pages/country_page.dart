@@ -24,15 +24,43 @@ class _CountryPageState extends State<CountryPage> {
     fetchCountryData();
     super.initState();
   }
-
+Icon customIcon= Icon(Icons.search);
+Widget customSearchBar= Text('Countries Status');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Countries Status'),
+        title: customSearchBar,
+        actions: <Widget>[
+          IconButton(
+            onPressed: (){
+//              showSearch(context: context, delegate: z());
+              setState(() {
+                if(this.customIcon.icon == Icons.search){
+                  this.customIcon= Icon(Icons.cancel);
+                  this.customSearchBar =TextField(
+                    decoration: InputDecoration(
+                      border:InputBorder.none,
+                      hintText: "Search Country",
+                    ),
+                    textInputAction: TextInputAction.go,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
+
+                    ),
+                  );
+                }else{
+                  this.customIcon= Icon(Icons.search);
+                  this.customSearchBar= Text('Countries Status');
+                }
+              });
+            },
+            icon: customIcon,
+          )
+        ],
       ),
       body: countryData== null ? Center(child: CircularProgressIndicator(),):ListView.builder(
-
         itemBuilder: (context, index){
           return Container(
             height: 130,
