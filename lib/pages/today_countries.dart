@@ -1,3 +1,4 @@
+import 'package:covid19/pages/todaySearch.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -11,7 +12,7 @@ class _TodayCountryPageState extends State<TodayCountryPage> {
 //  Country Data
   List countryData;
   fetchCountryData()async{
-    http.Response response = await http.get('https://corona.lmao.ninja/v2/countries');
+    http.Response response = await http.get('https://corona.lmao.ninja/v2/countries?sort=todayDeaths');
     setState(() {
       countryData =json.decode(response.body);
     });
@@ -29,56 +30,56 @@ class _TodayCountryPageState extends State<TodayCountryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.search),
+            onPressed: (){
+              showSearch(context: context, delegate: TodaySearchCountry(countryData));
+            },
+          )
+        ],
         title: Text('Today Countries Status'),
       ),
       body: countryData== null ? Center(child: CircularProgressIndicator(),):ListView.builder(
 
         itemBuilder: (context, index){
-          return Container(
-            height: 130,
-            margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey[100],
-                    blurRadius: 10,
-                    offset: Offset(0,10),
-                  )
-                ]),
-            child: Row(
-              children: <Widget>[
-                Container(margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(countryData[index]['country'],style: TextStyle(fontWeight: FontWeight.bold),),
-                      Image.network(countryData[index]['countryInfo']['flag'],
-                        height:50,width: 60,),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Container(
+          return Card(
+            child: Container(
+              height: 130,
+              margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+              child: Row(
+                children: <Widget>[
+                  Container(margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text('TODAY CONFIRMED : ' + countryData[index]['todayCases'].toString(),
-                          style: TextStyle(
-                              color: Colors.blueAccent,
-                              fontWeight: FontWeight.bold
-                          ),),
-                        Text('TODAY DEATHS : ' + countryData[index]['todayDeaths'].toString(),
-                          style: TextStyle(
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold
-                          ),),
-
+                        Text(countryData[index]['country'],style: TextStyle(fontWeight: FontWeight.bold),),
+                        Image.network(countryData[index]['countryInfo']['flag'],
+                          height:50,width: 60,),
                       ],
                     ),
                   ),
-                )
-              ],
+                  Expanded(
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text('TODAY CONFIRMED : ' + countryData[index]['todayCases'].toString(),
+                            style: TextStyle(
+                                color: Colors.blueAccent,
+                                fontWeight: FontWeight.bold
+                            ),),
+                          Text('TODAY DEATHS : ' + countryData[index]['todayDeaths'].toString(),
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold
+                            ),),
+
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           );
         },

@@ -46,14 +46,14 @@ class AboutPage extends StatelessWidget {
                 child: ListTile(
                   leading: Icon(
                     Icons.phone,
-                    color: Colors.teal,
+                    color: Colors.blue,
 
                   ),
                   title:Text(
                     '+880 1867 131 561',
                     style: TextStyle(
                       fontSize: 20.0,
-                      color: Colors.teal.shade900,
+                      color: Colors.black,
                     ),
                   ),
                 )
@@ -64,14 +64,14 @@ class AboutPage extends StatelessWidget {
                 child: ListTile(
                   leading: Icon(
                     Icons.email,
-                    color: Colors.teal,
+                    color: Colors.blue,
 
                   ),
                   title:Text(
                     'csesajjad@gmail.com',
                     style: TextStyle(
                       fontSize: 20.0,
-                      color: Colors.teal.shade900,
+                      color: Colors.black,
                     ),
                   ),
                 )

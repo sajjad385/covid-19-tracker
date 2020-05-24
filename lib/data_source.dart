@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 Color primaryBlack = Color(0xff202c3b);
 
 class DataSource{
-  static String quote = "'We are together in the fight. Nothing in life to be feared.  it is only to be understand. Now is the time to understand more, so that we may fear less.";
+  static String quote = "We are together in the fight. Nothing in life to be feared.  it is only to be understand. Now is the time to understand more, so that we may fear less.";
 
   static List questionAnswers =[
     {

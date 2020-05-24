@@ -18,7 +18,10 @@ class MostEffectedPanel extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: <Widget>[
-                Image.network(countryData[index]['countryInfo']['flag'],height: 30,),
+                Image.network(countryData[index]['countryInfo']['flag'],
+                  height: 30,
+                  width: 40,
+                ),
                 SizedBox(width: 10.0),
                 Text(countryData[index]['country'],style: TextStyle(
                   fontWeight: FontWeight.bold
@@ -30,7 +33,6 @@ class MostEffectedPanel extends StatelessWidget {
                 Text(' Confirmed : '+countryData[index]['cases'].toString(),style: TextStyle(
                   color: Colors.deepPurple
                 ),),
-                SizedBox(width: 10.0,),
               ],
             ),
           ),
